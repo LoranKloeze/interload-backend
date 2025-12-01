@@ -2,3 +2,19 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterLoad", "InterLoad.Api\InterLoad.csproj", "{BCF703F4-817E-4CF4-87B1-049C421112C2}"
 EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BCF703F4-817E-4CF4-87B1-049C421112C2} = {FB3A859A-4B00-4C09-BA2F-F3E478B3283C}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCF703F4-817E-4CF4-87B1-049C421112C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF703F4-817E-4CF4-87B1-049C421112C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF703F4-817E-4CF4-87B1-049C421112C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF703F4-817E-4CF4-87B1-049C421112C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
+
