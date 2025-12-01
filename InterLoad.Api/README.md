@@ -1,0 +1,1 @@
+﻿Get-Content .\app20251113.log -Wait | Select-String "SyncUltraOffice
