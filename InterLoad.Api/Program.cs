@@ -46,7 +46,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: corsPolicy, policy =>
     {
         policy
-            .WithOrigins("https://interload.local", "https://interload.codedivision.nl")
+            .WithOrigins("https://interload.local", "https://interload.codedivision.nl", "https://interload-frontend-wifj3-03af066d8bb1.herokuapp.com")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
