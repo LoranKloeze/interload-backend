@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text.RegularExpressions;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.PostgreSql;
@@ -64,8 +65,20 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+string connectionString;
+if (builder.Environment.IsProduction())
+{
+    var match = Regex.Match(Environment.GetEnvironmentVariable("DATABASE_URL") ?? "",
+        @"postgres://(.*):(.*)@(.*):(.*)/(.*)");
+    connectionString =
+        $"Server={match.Groups[3]};Port={match.Groups[4]};User Id={match.Groups[1]};Password={match.Groups[2]};Database={match.Groups[5]};sslmode=Prefer;Trust Server Certificate=true";
+}
+else
+{
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+}
+
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
 dataSourceBuilder.EnableDynamicJson();
 var dataSource = dataSourceBuilder.Build();
@@ -126,7 +139,7 @@ builder.Services.AddHangfire(configuration => configuration
     .UseConsole()
     .UseRecommendedSerializerSettings()
     .UsePostgreSqlStorage(c =>
-        c.UseNpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"))));
+        c.UseNpgsqlConnection(connectionString)));
 builder.Services.AddHangfireServer(options =>
 {
     options.Queues = ["default"];
